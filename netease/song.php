@@ -26,22 +26,31 @@ include "../Includes/function.php";
 
 		echo '
 	<div class="musicbox">
-		<img src="'.$song["result"]["songs"][0]["album"]["picUrl"].'" class="music-img">
-		<div class="music-info">
-			'.$song["result"]["songs"][0]["name"].'<br/><br/>
+		<img src="'.$song["result"]["songs"][0]["album"]["picUrl"].'?param=200y200" class="music-img">
+		<div class="music-info">';
+
+		$json = get_headers($link);
+		if(substr_count($json[0], '200')) {
+			echo '<a href="'.$link.'" download="'.$song["result"]["songs"][0]["name"].'.mp3">'.$song["result"]["songs"][0]["name"].'</a><br/><br/>
 			歌手：';
+		}
+		else {
+			echo '<span class="error">'.$song["result"]["songs"][0]["name"].'</span><br/><br/>
+			歌手：';
+		}
+		
 		foreach($song["result"]["songs"][0]["artists"] as $i=>$artist) {
 			echo ($i == 0 ? "":"/");
 			echo $artist["name"];
 		}
 		echo '<br/>
-			专辑：<a href="album.php?id='.$song["result"]["songs"][0]["album"]["id"].'">'.$song["result"]["songs"][0]["album"]["name"].'</a><br/>
-			<a href="'.$link.'" download="'.$song["result"]["songs"][0]["name"].'.mp3">下载</a>
+			专辑：<a href="album.php?id='.$song["result"]["songs"][0]["album"]["id"].'">'.$song["result"]["songs"][0]["album"]["name"].'</a>
 		</div>
-		<audio src="'.$link.'" type="audio/mp3" controls="controls" loop="loop" style="width:100%"></audio></div>';
+		<audio src="'.$link.'" type="audio/mp3" controls="controls" loop="loop" style="width:100%"></audio>
+	</div>';
 	}
 	else {
-		echo '<div class="table" style="border-left:solid 10px #BB0000;padding-left:5px">未查询到专辑</div>';
+		echo '<div class="table" style="border-left:solid 10px #BB0000;padding-left:5px">未查询到歌曲</div>';
 	}
 
 include "../Includes/footer.php";
