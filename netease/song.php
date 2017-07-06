@@ -35,7 +35,7 @@ include "../Includes/function.php";
 			echo $artist["name"];
 		}
 		echo '<br/>
-			专辑：<a href="album.php?id='.$song["result"]["songs"][0]["album"]["id"].'">'.$song["result"]["songs"][0]["album"]["name"].'</a><br/><br/>
+			专辑：<a href="album.php?id='.$song["result"]["songs"][0]["album"]["id"].'">'.$song["result"]["songs"][0]["album"]["name"].'</a><br/>
 			<a href="'.$link.'" download="'.$song["result"]["songs"][0]["name"].'.mp3">下载</a>
 		</div>
 		<audio src="'.$link.'" type="audio/mp3" controls="controls" loop="loop" style="width:100%"></audio></div>';
