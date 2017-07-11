@@ -8,6 +8,11 @@ include "../Includes/function.php";
 		$post_data = "offset=0&limit=1&type=1&s=".$_GET['id'];
 		$json = post_by_curl($url, $post_data);
 		$song = json_decode($json, true);
+
+		// Thanks to https://github.com/maicong/music/blob/master/music.php
+		$other_url = "http://music.163.com/api/song/enhance/player/url?ids=[".$_GET['id']."]&br=320000";
+		$other_json = get_by_curl($other_url);
+		$other_link = json_decode($other_json, true);
 	}
 	else {
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
@@ -24,18 +29,24 @@ include "../Includes/function.php";
 			$link = "http://p2.music.126.net/".encrypt_id($song["result"]["songs"][0]["bMusic"]["dfsId"])."/".$song["result"]["songs"][0]["bMusic"]["dfsId"].".mp3";
 		}
 
+		if($other_link["data"][0]["url"] != NULL) {
+			$link = $other_link["data"][0]["url"];
+		}
+		else if(!substr_count(get_headers($link)[0], '200')) {
+			$link = "Not Found";
+		}
+
 		echo '
 	<div class="musicbox">
 		<img src="'.$song["result"]["songs"][0]["album"]["picUrl"].'?param=200y200" class="music-img">
 		<div class="music-info">';
 
-		$json = get_headers($link);
-		if(substr_count($json[0], '200')) {
-			echo '<a href="'.$link.'" download="'.$song["result"]["songs"][0]["name"].'.mp3">'.$song["result"]["songs"][0]["name"].'</a><br/><br/>
+		if($link == "Not Found") {
+			echo '<span class="error">'.$song["result"]["songs"][0]["name"].'</span><br/><br/>
 			歌手：';
 		}
 		else {
-			echo '<span class="error">'.$song["result"]["songs"][0]["name"].'</span><br/><br/>
+			echo '<a href="'.$link.'" download="'.$song["result"]["songs"][0]["name"].'.mp3">'.$song["result"]["songs"][0]["name"].'</a><br/><br/>
 			歌手：';
 		}
 		
