@@ -39,6 +39,9 @@ include "../Includes/function.php";
 		echo '
 		</table>';
 	}
+	else if(ctype_digit($_POST['content'])) {
+		echo '<meta http-equiv="refresh" content="0;url=album.php?id='.$_POST['content'].'">';
+	}
 	else {
 		echo '<div class="table" style="border-left:solid 10px #BB0000;padding-left:5px">未查询到专辑</div>';
 	}

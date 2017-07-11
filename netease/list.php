@@ -4,16 +4,16 @@ include "../Includes/header.php";
 include "../Includes/function.php";
 
 	if(isset($_GET['id'])) {
-    	$url = "http://music.163.com/api/album/".$_GET['id']."?id=".$_GET['id'];
+    	$url = "http://music.163.com/api/playlist/detail?id=".$_GET['id'];
 		$json = get_by_curl($url);
-		$album = json_decode($json, true);
+		$list = json_decode($json, true);
 	}
 	else {
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 	}
 
-	if(array_key_exists("album", $album) && $album["album"]["size"] > 0) {
-		echo '<div class="table" style="border-left:solid 10px #000000;padding-left:5px">专辑下查询到'.$album["album"]["size"].'首歌</div>';
+	if(array_key_exists("result", $list) && $list["result"]["trackCount"] > 0) {
+		echo '<div class="table" style="border-left:solid 10px #000000;padding-left:5px">'.$list["result"]["name"].' by '.$list["result"]["creator"]["nickname"].'</div>';
 		echo '
 		<table class="table">
 			<tr>
@@ -23,7 +23,7 @@ include "../Includes/function.php";
 				<th>时长</th>
 				<th>操作</th>
 			</tr>';
-		foreach($album["album"]["songs"] as $index=>$song) {
+		foreach($list["result"]["tracks"] as $index=>$song) {
 			if($song["mMusic"] != null) {
 				$min = floor($song["mMusic"]["playTime"] / 1000 / 60);
 				$sec = floor($song["mMusic"]["playTime"] / 1000 % 60);
@@ -57,7 +57,7 @@ include "../Includes/function.php";
 		</table>';
 	}
 	else {
-		echo '<div class="table" style="border-left:solid 10px #BB0000;padding-left:5px">未查询到专辑</div>';
+		echo '<div class="table" style="border-left:solid 10px #BB0000;padding-left:5px">未查询到歌单</div>';
 	}
 
 include "../Includes/footer.php";
