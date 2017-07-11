@@ -8,6 +8,10 @@ include "../Includes/function.php";
 		$post_data = "offset=0&limit=1&type=1&s=".$_GET['id'];
 		$json = post_by_curl($url, $post_data);
 		$song = json_decode($json, true);
+		
+		// Get lyric of the song
+		// $url = "http://music.163.com/api/song/media?id=".$_GET['id'];
+		// $lyric = json_decode(get_by_curl($url), true)["lyric"];
 
 		// Thanks to https://github.com/maicong/music/blob/master/music.php
 		$other_url = "http://music.163.com/api/song/enhance/player/url?ids=[".$_GET['id']."]&br=320000";
