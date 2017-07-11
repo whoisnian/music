@@ -15,9 +15,14 @@
 				<a class="menu-title" href="/">Music</a>
 				<nav class="other">
 					<a href="/">首页</a>
-					<a href="/netease/?id=1">网易</a>
-					<!--<a href="/kugou">酷狗</a>
-					<a href="/xiami">虾米</a>-->
+				</nav>
+				<nav class="dropdown">
+					<a href="#">网易</a></br>
+					<nav class="drop-content">
+						<a href="/netease?id=1">歌曲搜索</a>
+						<a href="/netease?id=2">专辑搜索</a>
+						<a href="/netease?id=3">歌单搜索</a>
+					</nav>
 				</nav>
 			</div>
 			<br/>
