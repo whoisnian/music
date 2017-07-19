@@ -1,5 +1,4 @@
 <?php
-
 function get_by_curl($url) {
 	$ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -10,7 +9,6 @@ function get_by_curl($url) {
     curl_close($ch);
     return $data;
 }
-
 function post_by_curl($url, $post_data) {
 	$ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -24,7 +22,6 @@ function post_by_curl($url, $post_data) {
     curl_close($ch);
     return $data;
 }
-
 // Thanks to https://github.com/metowolf/Meting/blob/master/src/Meting.php
 function encrypt_id($id) {
     $str1 = str_split('3go8&$8*3*3h0k(2)2');
@@ -36,5 +33,4 @@ function encrypt_id($id) {
     $result = str_replace(array('/','+'), array('_','-'), $result);
     return $result;
 }
-
 ?>

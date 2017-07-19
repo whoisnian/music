@@ -1,8 +1,53 @@
 <?php
-$TITLE = "作品详情";
-include "../Includes/header.php";
-include "../Includes/function.php";
-
+$TITLE = '歌曲详情';
+$TABS = '';
+$OTHERSTYLE = '
+	<style>
+	.center {
+		margin: auto;
+		min-width: 40%;
+		min-height: auto;
+	}
+	.wide {
+		width:100%;
+	}
+	.maxlen {
+		white-space: nowrap;
+		display: inline-block;
+		vertical-align:top;
+		max-width: 10em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	@media (min-width: 40em) {
+		.maxlen	{
+			max-width: 20em;
+		}
+	}
+	@media (min-width: 60em) {
+		.maxlen	{
+			max-width: 30em;
+		}
+	}
+	.img {
+		width: 100px; 
+		height: 100px;
+	}
+	@media (min-width: 40em) {
+		.img {
+			width: 125px;
+			height: 125px;
+		}
+	}
+	@media (min-width: 60em) {
+		.img {
+			width: 150px;
+			height: 150px;
+		}
+	}
+	</style>';
+include '../include/header.php';
+include "../include/function.php";
 	if(isset($_GET['id'])) {
 		$url = "http://music.163.com/api/search/pc";
 		$post_data = "offset=0&limit=1&type=1&s=".$_GET['id'];
@@ -20,6 +65,7 @@ include "../Includes/function.php";
 	}
 	else {
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
+		exit();
 	}
 
 	if(array_key_exists("result", $song) && $song["result"]["songCount"] > 0) {
@@ -41,32 +87,44 @@ include "../Includes/function.php";
 		}
 
 		echo '
-	<div class="musicbox">
-		<img src="'.$song["result"]["songs"][0]["album"]["picUrl"].'?param=200y200" class="music-img">
-		<div class="music-info">';
-
-		if($link == "Not Found") {
-			echo '<span class="error">'.$song["result"]["songs"][0]["name"].'</span><br/><br/>
-			歌手：';
-		}
-		else {
-			echo '<a href="'.$link.'" download="'.$song["result"]["songs"][0]["name"].'.mp3">'.$song["result"]["songs"][0]["name"].'</a><br/><br/>
-			歌手：';
-		}
-		
+		  <div class="center mdl-card mdl-grid mdl-grid--no-spacing mdl-shadow--6dp">
+		    <span><img class="img" src="'.$song["result"]["songs"][0]["album"]["picUrl"].'?param=200y200"></span>
+			<span class="center">
+			  <div class="maxlen">
+			    '.$song["result"]["songs"][0]["name"].'
+		      </div><br/><br/>
+			  <div class="maxlen">
+				歌手：';
 		foreach($song["result"]["songs"][0]["artists"] as $i=>$artist) {
 			echo ($i == 0 ? "":"/");
 			echo $artist["name"];
 		}
 		echo '<br/>
-			专辑：<a href="album.php?id='.$song["result"]["songs"][0]["album"]["id"].'">'.$song["result"]["songs"][0]["album"]["name"].'</a>
-		</div>
-		<audio src="'.$link.'" type="audio/mp3" controls="controls" loop="loop" style="width:100%"></audio>
-	</div>';
+				专辑：<a href="album.php?id='.$song["result"]["songs"][0]["album"]["id"].'">'.$song["result"]["songs"][0]["album"]["name"].'</a>
+			  </div>
+			</span>
+			<span class="mdl-card__menu">
+			  <a href="'.$link.'" download="'.$song["result"]["songs"][0]["name"].'.mp3">
+				<button class="mdl-button mdl-button--icon mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+				  <i class="material-icons">file_download</i>
+				</button>
+			  </a>
+			</span>
+			<span class="mdl-card__actions mdl-card--border">
+			  <audio src="'.$link.'" type="audio/mp3" controls="controls" loop="loop" style="width:100%"></audio>
+			</span>
+		  </div>';
 	}
 	else {
-		echo '<div class="table" style="border-left:solid 10px #BB0000;padding-left:5px">未查询到歌曲</div>';
+		echo '
+		  <ul class="demo-list-control mdl-list center">
+			<li class="mdl-list__item">
+			  <span class="mdl-list__item-primary-content">
+			    <i class="material-icons mdl-list__item-avatar">clear</i>
+				未查询到歌曲
+			  </span>
+			</li>
+		  </ul>';
 	}
-
-include "../Includes/footer.php";
+include "../include/footer.php";
 ?>

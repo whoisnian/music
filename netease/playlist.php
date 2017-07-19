@@ -1,5 +1,5 @@
 <?php
-$TITLE = '专辑详情';
+$TITLE = '歌单详情';
 $TABS = '';
 $OTHERSTYLE = '
 	<style>
@@ -32,19 +32,19 @@ $OTHERSTYLE = '
 include '../include/header.php';
 include "../include/function.php";
 	if(isset($_GET['id'])) {
-    	$url = "http://music.163.com/api/album/".$_GET['id']."?id=".$_GET['id'];
+    	$url = "http://music.163.com/api/playlist/detail?id=".$_GET['id'];
 		$json = get_by_curl($url);
-		$album = json_decode($json, true);
+		$playlist = json_decode($json, true);
 	}
 	else {
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 		exit();
 	}
 
-	if(array_key_exists("album", $album) && $album["album"]["size"] > 0) {
+	if(array_key_exists("result", $playlist) && $playlist["result"]["trackCount"] > 0) {
 		echo '
 		  <ul class="demo-list-two mdl-list center">';
-		foreach($album["album"]["songs"] as $index=>$song) {
+		foreach($playlist["result"]["tracks"] as $index=>$song) {
 			/*if($song["mMusic"] != null) {
 				$min = floor($song["mMusic"]["playTime"] / 1000 / 60);
 				$sec = floor($song["mMusic"]["playTime"] / 1000 % 60);
@@ -60,7 +60,7 @@ include "../include/function.php";
 
 			echo '
 			  <li style="padding:0 5px" class="mdl-list__item mdl-list__item--two-line">
-				<h4>'.($album["album"]["size"]>99 ? sprintf("%03d", $index+1) : sprintf("%02d", $index+1)).'</h4> 
+				<h4>'.($playlist["result"]["trackCount"]>99 ? sprintf("%03d", $index+1) : sprintf("%02d", $index+1)).'</h4> 
 				<span class="mdl-list__item-primary-content">
 				  <i class="material-icons mdl-list__item-avatar">music_note</i>
 				  <span class="maxlen">'.$song["name"].'</span>
