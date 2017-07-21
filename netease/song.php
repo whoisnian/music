@@ -45,6 +45,11 @@ $OTHERSTYLE = '
 			height: 150px;
 		}
 	}
+	.player {
+		width: 100%;
+		padding: 0;
+		border-collapse: collapse;
+	}
 	</style>';
 include '../include/header.php';
 include "../include/function.php";
@@ -86,6 +91,20 @@ include "../include/function.php";
 			$link = "Not Found";
 		}
 
+		if($song["result"]["songs"][0]["mMusic"] != null) {
+			$min = floor($song["result"]["songs"][0]["mMusic"]["playTime"] / 1000 / 60);
+			$sec = floor($song["result"]["songs"][0]["mMusic"]["playTime"] / 1000 % 60);
+			$min = str_pad($min, 2, '0', STR_PAD_LEFT);
+			$sec = str_pad($sec, 2, '0', STR_PAD_LEFT);
+		}
+		else {
+			$min = floor($song["result"]["songs"][0]["bMusic"]["playTime"] / 1000 / 60);
+			$sec = floor($song["result"]["songs"][0]["bMusic"]["playTime"] / 1000 % 60);
+			$min = str_pad($min, 2, '0', STR_PAD_LEFT);
+			$sec = str_pad($sec, 2, '0', STR_PAD_LEFT);
+		}
+		$time = $min.':'.$sec;
+
 		echo '
 		  <div class="center mdl-card mdl-grid mdl-grid--no-spacing mdl-shadow--6dp">
 		    <span><img class="img" src="'.$song["result"]["songs"][0]["album"]["picUrl"].'?param=200y200"></span>
@@ -103,16 +122,21 @@ include "../include/function.php";
 				专辑：<a href="album.php?id='.$song["result"]["songs"][0]["album"]["id"].'">'.$song["result"]["songs"][0]["album"]["name"].'</a>
 			  </div>
 			</span>
-			<span class="mdl-card__menu">
-			  <a href="'.$link.'" download="'.$song["result"]["songs"][0]["name"].'.mp3">
-				<button class="mdl-button mdl-button--icon mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+			<audio src="'.$link.'" type="audio/mp3" id="player_music"></audio>
+			<table class="mdl-card__actions mdl-card--border player" id="player">
+			  <td style="width:5%"><button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+				<i class="material-icons" id="player_button">play_arrow</i>
+			  </button></td>
+			  <td style="width:80%">
+				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0" id="player_slider">
+			  </td>
+			  <td style="width:10%"><span id="player_time">00:00</span>/'.$time.'</td>
+			  <td style="width:5%"><a href="'.$link.'" download="'.$song["result"]["songs"][0]["name"].'.mp3">
+				<button class="player-td mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
 				  <i class="material-icons">file_download</i>
 				</button>
-			  </a>
-			</span>
-			<span class="mdl-card__actions mdl-card--border">
-			  <audio src="'.$link.'" type="audio/mp3" controls="controls" loop="loop" style="width:100%"></audio>
-			</span>
+			  </a></td>
+			</table>
 		  </div>';
 	}
 	else {

@@ -15,6 +15,7 @@
 	  </main>
     </div>
 	<script src="/js/material.min.js"></script>
+	<script src="/js/player.js"></script>
   </body>
 </html>';
 ?>
