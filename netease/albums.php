@@ -67,7 +67,7 @@ include "../include/function.php";
 		echo '
 		  </ul>';
 	}
-	else if(ctype_digit($_POST['content'])) {
+	else if(ctype_digit($_POST['album'])) {
 		echo '<meta http-equiv="refresh" content="0;url=album.php?id='.$_POST['album'].'">';
 		exit();
 	}
