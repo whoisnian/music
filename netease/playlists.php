@@ -63,7 +63,7 @@ include "../include/function.php";
 		  </ul>';
 	}
 	else if(ctype_digit($_POST['playlist'])) {
-		echo '<meta http-equiv="refresh" content="0;url=list.php?id='.$_POST['playlist'].'">';
+		echo '<meta http-equiv="refresh" content="0;url=playlist.php?id='.$_POST['playlist'].'">';
 		exit();
 	}
 	else {
