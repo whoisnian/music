@@ -87,7 +87,7 @@ include "../include/function.php";
 			<li class="mdl-list__item">
 			  <span class="mdl-list__item-primary-content">
 			    <i class="material-icons mdl-list__item-avatar">clear</i>
-				未查询到歌曲
+				未查询到歌单
 			  </span>
 			</li>
 		  </ul>';
