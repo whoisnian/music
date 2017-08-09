@@ -32,50 +32,46 @@ $OTHERSTYLE = '
 include '../include/header.php';
 include "../include/function.php";
 	if(isset($_POST['song'])) {
-    $url = "http://music.163.com/api/search/pc";
-		$post_data = "offset=0&limit=99&type=1&s=".rawurlencode($_POST['song']);
-		$json = post_by_curl($url, $post_data, "163");
+    $url = "http://c.y.qq.com/soso/fcgi-bin/client_search_cp?p=1&n=30&inCharset=utf-8&outCharset=utf-8&format=json&w=".rawurlencode($_POST['song']);
+		$url2 = "http://c.y.qq.com/soso/fcgi-bin/client_search_cp?p=2&n=30&inCharset=utf-8&outCharset=utf-8&format=json&w=".rawurlencode($_POST['song']);
+		$url3 = "http://c.y.qq.com/soso/fcgi-bin/client_search_cp?p=3&n=30&inCharset=utf-8&outCharset=utf-8&format=json&w=".rawurlencode($_POST['song']);
+		$json = get_by_curl($url, "qq");
+		$json2 = get_by_curl($url2, "qq");
+		$json3 = get_by_curl($url3, "qq");
 		$songs = json_decode($json, true);
+		$songs2 = json_decode($json2, true);
+		$songs3 = json_decode($json3, true);
+		if($songs["data"]["song"]["list"] != NULL) {
+			$songs["data"]["song"]["list"] = array_merge($songs["data"]["song"]["list"], $songs2["data"]["song"]["list"], $songs3["data"]["song"]["list"]);
+		}
 	}
 	else {
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 		exit();
 	}
-
-	if(array_key_exists("result", $songs) && $songs["result"]["songCount"] > 0) {
+	
+	if(array_key_exists("data", $songs) && $songs["data"]["song"]["totalnum"] > 0) {
 		echo '
 		  <ul class="demo-list-two mdl-list center">';
-		foreach($songs["result"]["songs"] as $index=>$song) {
-			/*if($song["mMusic"] != null) {
-				$min = floor($song["mMusic"]["playTime"] / 1000 / 60);
-				$sec = floor($song["mMusic"]["playTime"] / 1000 % 60);
-				$min = str_pad($min, 2, '0', STR_PAD_LEFT);
-				$sec = str_pad($sec, 2, '0', STR_PAD_LEFT);
-			}
-			else {
-				$min = floor($song["bMusic"]["playTime"] / 1000 / 60);
-				$sec = floor($song["bMusic"]["playTime"] / 1000 % 60);
-				$min = str_pad($min, 2, '0', STR_PAD_LEFT);
-				$sec = str_pad($sec, 2, '0', STR_PAD_LEFT);
-			}*/
+		foreach($songs["data"]["song"]["list"] as $index=>$song) {
 
 			echo '
 			  <li style="padding:0 5px" class="mdl-list__item mdl-list__item--two-line">
 				<h4>'.sprintf("%02d", $index+1).'</h4> 
 				<span class="mdl-list__item-primary-content">
 				  <i class="material-icons mdl-list__item-avatar">music_note</i>
-				  <span class="maxlen">'.$song["name"].'</span>
+				  <span class="maxlen">'.$song["songname"].'</span>
 				  <span class="mdl-list__item-sub-title maxlen">';
 
-			foreach($song["artists"] as $i=>$artist) {
+			foreach($song["singer"] as $i=>$singer) {
 				echo ($i == 0 ? "":"/");
-				echo $artist["name"];
+				echo $singer["name"];
 			}
 
 			echo '</span>
 				</span>
 				<span class="mdl-list__item-secondary-content">
-				  <a class="mdl-list__item-secondary-action" href="song.php?id='.$song["id"].'"><i class="material-icons">zoom_in</i></a>
+				  <a class="mdl-list__item-secondary-action" href="song.php?mid='.$song["songmid"].'"><i class="material-icons">zoom_in</i></a>
 				</span>
 			  </li>';
 		}

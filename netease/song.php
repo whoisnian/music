@@ -55,7 +55,7 @@ include '../include/header.php';
 include "../include/function.php";
 	if(isset($_GET['id'])) {
 		$url = "http://music.163.com/api/song/detail/?id=".$_GET['id']."&ids=[".$_GET['id']."]";
-		$json = get_by_curl($url);
+		$json = get_by_curl($url, "163");
 		$song_detail = json_decode($json, true);
 		
 		// Get lyric of the song
@@ -64,7 +64,7 @@ include "../include/function.php";
 
 		// Thanks to https://github.com/maicong/music/blob/master/music.php
 		$other_url = "http://music.163.com/api/song/enhance/player/url?ids=[".$_GET['id']."]&br=320000";
-		$other_json = get_by_curl($other_url);
+		$other_json = get_by_curl($other_url, "163");
 		$other_link = json_decode($other_json, true);
 	}
 	else {
@@ -72,35 +72,37 @@ include "../include/function.php";
 		exit();
 	}
 
-	if(array_key_exists("album", $song_detail["songs"][0]) && $song_detail["code"] == 200) {
-
-		$url = "http://music.163.com/api/album/".$song_detail["songs"][0]["album"]["id"]."?id=".$song_detail["songs"][0]["album"]["id"];
-		$json = get_by_curl($url);
-		$album = json_decode($json, true);
-
-		foreach($album["album"]["songs"] as $song) {
-			if($song["id"] == $_GET['id'])
-				break;
-		}
-
-		if(array_key_exists("mp3Url", $song) && $song["mp3Url"] != null) {
-			$link = str_replace("http://m2", "http://p2", $song["mp3Url"]);
-		}
-		else if($song["mMusic"]["dfsId"] != 0) {
-			$link = "http://p2.music.126.net/".encrypt_id($song["mMusic"]["dfsId"])."/".$song["mMusic"]["dfsId"].".mp3";
+	if($song_detail["songs"] != NULL && $song_detail["code"] == 200) {
+		if($other_link["data"][0]["url"] != NULL && substr_count(get_headers($other_link["data"][0]["url"])[0], '200')) {
+			$link = $other_link["data"][0]["url"];
+			$song = $song_detail["songs"][0];
 		}
 		else {
-			$link = "http://p2.music.126.net/".encrypt_id($song["bMusic"]["dfsId"])."/".$song["bMusic"]["dfsId"].".mp3";
+			$url = "http://music.163.com/api/album/".$song_detail["songs"][0]["album"]["id"]."?id=".$song_detail["songs"][0]["album"]["id"];
+			$json = get_by_curl($url, "163");
+			$album = json_decode($json, true);
+
+			foreach($album["album"]["songs"] as $song) {
+				if($song["id"] == $_GET['id'])
+					break;
+			}
+
+			if(array_key_exists("mp3Url", $song) && $song["mp3Url"] != null) {
+				$link = str_replace("http://m2", "http://p2", $song["mp3Url"]);
+			}
+			else if($song["mMusic"]["dfsId"] != 0) {
+				$link = "http://p2.music.126.net/".encrypt_id($song["mMusic"]["dfsId"])."/".$song["mMusic"]["dfsId"].".mp3";
+			}
+			else {
+				$link = "http://p2.music.126.net/".encrypt_id($song["bMusic"]["dfsId"])."/".$song["bMusic"]["dfsId"].".mp3";
+			}
+
+			if(!substr_count(get_headers($link)[0], '200')) {
+				$link = "Not-Found";
+			}
 		}
 
-		if($other_link["data"][0]["url"] != NULL) {
-			$link = $other_link["data"][0]["url"];
-		}
-		else if(!substr_count(get_headers($link)[0], '200')) {
-			$link = "Not Found";
-		}
-
-		if($song["mMusic"] != null) {
+		if($song["mMusic"] != NULL) {
 			$min = floor($song["mMusic"]["playTime"] / 1000 / 60);
 			$sec = floor($song["mMusic"]["playTime"] / 1000 % 60);
 			$min = str_pad($min, 2, '0', STR_PAD_LEFT);
@@ -115,38 +117,38 @@ include "../include/function.php";
 		$time = $min.':'.$sec;
 
 		echo '
-		  <div class="center mdl-card mdl-grid mdl-grid--no-spacing mdl-shadow--6dp">
-		    <span><img class="img" src="'.$song["album"]["picUrl"].'?param=200y200"></span>
-			<span class="center">
-			  <div class="maxlen">
-			    '.$song["name"].'
-		      </div><br/><br/>
-			  <div class="maxlen">
-				歌手：';
+			<div class="center mdl-card mdl-grid mdl-grid--no-spacing mdl-shadow--6dp">
+				<span><img class="img" src="'.$song["album"]["picUrl"].'?param=200y200"></span>
+				<span class="center">
+					<div class="maxlen">
+						'.$song["name"].'
+					</div><br/><br/>
+					<div class="maxlen">
+				  	歌手：';
 		foreach($song["artists"] as $i=>$artist) {
 			echo ($i == 0 ? "":"/");
 			echo $artist["name"];
 		}
 		echo '<br/>
-				专辑：<a href="album.php?id='.$song["album"]["id"].'">'.$song["album"]["name"].'</a>
-			  </div>
-			</span>
-			<audio src="'.$link.'" type="audio/mp3" id="player_music"></audio>
-			<table class="mdl-card__actions mdl-card--border player" id="player">
-			  <td style="width:5%"><button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
-				<i class="material-icons" id="player_button">play_arrow</i>
-			  </button></td>
-			  <td style="width:80%">
-				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0" id="player_slider">
-			  </td>
-			  <td style="width:10%"><span id="player_time">00:00</span>/'.$time.'</td>
-			  <td style="width:5%"><a href="'.$link.'" download="'.$song["name"].'.mp3">
-				<button class="player-td mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
-				  <i class="material-icons">file_download</i>
-				</button>
-			  </a></td>
-			</table>
-		  </div>';
+				  	专辑：<a href="album.php?id='.$song["album"]["id"].'">'.$song["album"]["name"].'</a>
+					</div>
+				</span>
+				<audio src="'.$link.'" type="audio/mp3" id="player_music"></audio>
+				<table class="mdl-card__actions mdl-card--border player" id="player">
+					<td style="width:5%"><button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+						<i class="material-icons" id="player_button">play_arrow</i>
+					</button></td>
+					<td style="width:80%">
+						<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0" id="player_slider">
+					</td>
+					<td style="width:10%"><span id="player_time">00:00</span>/'.$time.'</td>
+					<td style="width:5%"><a href="'.$link.'" download="'.$song["name"].'.mp3">
+					<button class="player-td mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+						<i class="material-icons">file_download</i>
+					</button>
+					</a></td>
+				</table>
+			</div>';
 	}
 	else {
 		echo '
@@ -154,7 +156,7 @@ include "../include/function.php";
 			<li class="mdl-list__item">
 			  <span class="mdl-list__item-primary-content">
 			    <i class="material-icons mdl-list__item-avatar">clear</i>
-				未查询到歌曲
+					未查询到歌曲
 			  </span>
 			</li>
 		  </ul>';

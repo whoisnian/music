@@ -15,19 +15,19 @@ include './include/header.php';
 		    <i class="material-icons">search</i>
 		  </div>
 		  <div class="mdl-tooltip" data-mdl-for="search">
-			搜 索
+			  搜 索
 		  </div>
 		  <div id="listen" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
 		    <i class="material-icons">headset</i>
 		  </div>
 		  <div class="mdl-tooltip" data-mdl-for="listen">
-			试 听
+			  试 听
 		  </div>
 		  <div id="download" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-			<i class="material-icons">file_download</i>
+			  <i class="material-icons">file_download</i>
 		  </div>
 		  <div class="mdl-tooltip" data-mdl-for="download">
-			下 载
+			  下 载
 		  </div>
 		</h1>';
 include "./include/footer.php";

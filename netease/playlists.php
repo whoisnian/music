@@ -32,9 +32,9 @@ $OTHERSTYLE = '
 include '../include/header.php';
 include "../include/function.php";
 	if(isset($_POST['playlist'])) {
-    	$url = "http://music.163.com/api/search/pc";
-		$post_data = "offset=0&limit=99&type=1000&s=".$_POST['playlist'];
-		$json = post_by_curl($url, $post_data);
+    $url = "http://music.163.com/api/search/pc";
+		$post_data = "offset=0&limit=99&type=1000&s=".rawurlencode($_POST['playlist']);
+		$json = post_by_curl($url, $post_data, "163");
 		$playlists = json_decode($json, true);
 	}
 	else {
@@ -72,7 +72,7 @@ include "../include/function.php";
 			<li class="mdl-list__item">
 			  <span class="mdl-list__item-primary-content">
 			    <i class="material-icons mdl-list__item-avatar">clear</i>
-				未查询到歌单
+				  未查询到歌单
 			  </span>
 			</li>
 		  </ul>';

@@ -32,8 +32,8 @@ $OTHERSTYLE = '
 include '../include/header.php';
 include "../include/function.php";
 	if(isset($_GET['id'])) {
-    	$url = "http://music.163.com/api/album/".$_GET['id']."?id=".$_GET['id'];
-		$json = get_by_curl($url);
+    $url = "http://music.163.com/api/album/".$_GET['id']."?id=".$_GET['id'];
+		$json = get_by_curl($url, "163");
 		$album = json_decode($json, true);
 	}
 	else {
@@ -87,7 +87,7 @@ include "../include/function.php";
 			<li class="mdl-list__item">
 			  <span class="mdl-list__item-primary-content">
 			    <i class="material-icons mdl-list__item-avatar">clear</i>
-				未查询到专辑
+				  未查询到专辑
 			  </span>
 			</li>
 		  </ul>';

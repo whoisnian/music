@@ -1,22 +1,33 @@
 <?php
-function get_by_curl($url) {
+function get_by_curl($url, $site) {
 	$ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_COOKIE, "appver=1.5.0.75771");
-	curl_setopt($ch, CURLOPT_REFERER, "http://music.163.com/");
+	if($site == "163") {
+        curl_setopt($ch, CURLOPT_COOKIE, "appver=1.5.0.75771");
+	    curl_setopt($ch, CURLOPT_REFERER, "http://music.163.com/");
+    }
+    else if($site == "qq") {
+        curl_setopt($ch, CURLOPT_REFERER, "http://y.qq.com/");
+    }
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     $data = curl_exec($ch);
     curl_close($ch);
     return $data;
 }
-function post_by_curl($url, $post_data) {
+function post_by_curl($url, $post_data, $site) {
 	$ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
-	curl_setopt($ch, CURLOPT_COOKIE, "appver=1.5.0.75771");
-	curl_setopt($ch, CURLOPT_REFERER, "http://music.163.com/");
+	if($site == "163") {
+        curl_setopt($ch, CURLOPT_COOKIE, "appver=1.5.0.75771");
+	    curl_setopt($ch, CURLOPT_REFERER, "http://music.163.com/");
+    }
+    else if($site == "qq") {
+        curl_setopt($ch, CURLOPT_REFERER, "http://y.qq.com/");
+    }
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     $data = curl_exec($ch);
     curl_close($ch);
