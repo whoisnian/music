@@ -32,7 +32,7 @@ $OTHERSTYLE = '
 include '../include/header.php';
 include "../include/function.php";
 	if(isset($_GET['mid'])) {
-    $url = "http://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg?inCharset=utf-8&outCharset=utf-8&albummid=".$_GET['mid'];
+    $url = "http://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg?inCharset=utf8&outCharset=utf-8&albummid=".$_GET['mid'];
 		$json = get_by_curl($url, "qq");
 		$album = json_decode($json, true);
 	}

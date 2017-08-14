@@ -32,21 +32,9 @@ $OTHERSTYLE = '
 include '../include/header.php';
 include "../include/function.php";
 	if(isset($_POST['playlist'])) {
-    $url = "http://c.y.qq.com/soso/fcgi-bin/client_music_search_songlist?page_no=0&num_per_page=30&inCharset=utf-8&outCharset=utf-8&format=json&query=".rawurlencode($_POST['playlist']);
-		$url2 = "http://c.y.qq.com/soso/fcgi-bin/client_music_search_songlist?page_no=1&num_per_page=30&inCharset=utf-8&outCharset=utf-8&format=json&query=".rawurlencode($_POST['playlist']);
-		$url3 = "http://c.y.qq.com/soso/fcgi-bin/client_music_search_songlist?page_no=2&num_per_page=30&inCharset=utf-8&outCharset=utf-8&format=json&query=".rawurlencode($_POST['playlist']);
+    $url = "http://c.y.qq.com/soso/fcgi-bin/client_music_search_songlist?page_no=0&num_per_page=30&inCharset=utf8&outCharset=utf-8&format=json&query=".rawurlencode($_POST['playlist']);
 		$json = get_by_curl($url, "qq");
-		$json2 = get_by_curl($url2, "qq");
-		$json3 = get_by_curl($url3, "qq");
-		$json = mb_convert_encoding($json, "UTF-8", "auto");
-		$json2 = mb_convert_encoding($json2, "UTF-8", "auto");
-		$json3 = mb_convert_encoding($json3, "UTF-8", "auto");
 		$playlists = json_decode($json, true);
-		$playlists2 = json_decode($json2, true);
-		$playlists3 = json_decode($json3, true);
-		if($playlists["data"]["list"] != NULL) {
-			$playlists["data"]["list"] = array_merge($playlists["data"]["list"], $playlists2["data"]["list"], $playlists3["data"]["list"]);
-		}
 	}
 	else {
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';

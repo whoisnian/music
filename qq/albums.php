@@ -36,18 +36,9 @@ $OTHERSTYLE = '
 include '../include/header.php';
 include "../include/function.php";
 	if(isset($_POST['album'])) {
-    $url = "http://c.y.qq.com/soso/fcgi-bin/client_search_cp?t=8&p=1&n=30&inCharset=utf-8&outCharset=utf-8&format=json&w=".rawurlencode($_POST['album']);
-		$url2 = "http://c.y.qq.com/soso/fcgi-bin/client_search_cp?t=8&p=2&n=30&inCharset=utf-8&outCharset=utf-8&format=json&w=".rawurlencode($_POST['album']);
-		$url3 = "http://c.y.qq.com/soso/fcgi-bin/client_search_cp?t=8&p=3&n=30&inCharset=utf-8&outCharset=utf-8&format=json&w=".rawurlencode($_POST['album']);
+    $url = "http://c.y.qq.com/soso/fcgi-bin/client_search_cp?t=8&p=1&n=30&inCharset=utf8&outCharset=utf-8&format=json&w=".rawurlencode($_POST['album']);
 		$json = get_by_curl($url, "qq");
-		$json2 = get_by_curl($url2, "qq");
-		$json3 = get_by_curl($url3, "qq");
 		$albums = json_decode($json, true);
-		$albums2 = json_decode($json2, true);
-		$albums3 = json_decode($json3, true);
-		if($albums["data"]["album"]["list"] != NULL) {
-			$albums["data"]["album"]["list"] = array_merge($albums["data"]["album"]["list"], $albums2["data"]["album"]["list"], $albums3["data"]["album"]["list"]);
-		}
 	}
 	else {
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';

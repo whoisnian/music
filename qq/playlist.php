@@ -32,9 +32,8 @@ $OTHERSTYLE = '
 include '../include/header.php';
 include "../include/function.php";
 	if(isset($_GET['id'])) {
-    $url = "https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?inCharset=utf-8&outCharset=utf-8&format=json&type=1&disstid=".$_GET['id'];
+    $url = "https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?inCharset=utf8&outCharset=utf-8&format=json&type=1&disstid=".$_GET['id'];
 		$json = get_by_curl($url, "qq");
-		$json = mb_convert_encoding($json, "UTF-8", "auto");
 		$playlist = json_decode($json, true);
 	}
 	else {
