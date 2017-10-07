@@ -4,13 +4,19 @@ function get_by_curl($url, $site) {
     curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	if($site == "163") {
-        curl_setopt($ch, CURLOPT_COOKIE, "appver=1.5.0.75771");
+		$header = array(
+            'X-Real-IP: 118.88.88.88',
+            'Cookie: appver=2.0.2',
+            'Accept-Language: zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4',
+            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
+        );
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 	    curl_setopt($ch, CURLOPT_REFERER, "http://music.163.com/");
     }
     else if($site == "qq") {
-        curl_setopt($ch, CURLOPT_REFERER, "http://y.qq.com/");
+		curl_setopt($ch, CURLOPT_REFERER, "http://y.qq.com/");
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     }
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     $data = curl_exec($ch);
     curl_close($ch);
     return $data;
@@ -22,13 +28,20 @@ function post_by_curl($url, $post_data, $site) {
     curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
 	if($site == "163") {
-        curl_setopt($ch, CURLOPT_COOKIE, "appver=1.5.0.75771");
+		$header = array(
+            'X-Real-IP: 118.88.88.88',
+            'Cookie: appver=2.0.2',
+            'Accept-Language: zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4',
+			'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
+			'Content-Type: application/x-www-form-urlencoded'
+        );
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 	    curl_setopt($ch, CURLOPT_REFERER, "http://music.163.com/");
     }
     else if($site == "qq") {
-        curl_setopt($ch, CURLOPT_REFERER, "http://y.qq.com/");
+		curl_setopt($ch, CURLOPT_REFERER, "http://y.qq.com/");
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     }
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     $data = curl_exec($ch);
     curl_close($ch);
     return $data;
