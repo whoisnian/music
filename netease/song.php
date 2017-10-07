@@ -73,7 +73,7 @@ include "../include/function.php";
 	}
 
 	if($song_detail["songs"] != NULL && $song_detail["code"] == 200) {
-		if($other_link["data"][0]["url"] != NULL && substr_count(get_headers($other_link["data"][0]["url"])[0], '200')) {
+		if($other_link["data"][0]["url"] != NULL) {
 			$link = $other_link["data"][0]["url"];
 			$song = $song_detail["songs"][0];
 		}
@@ -95,10 +95,6 @@ include "../include/function.php";
 			}
 			else {
 				$link = "http://p2.music.126.net/".encrypt_id($song["bMusic"]["dfsId"])."/".$song["bMusic"]["dfsId"].".mp3";
-			}
-
-			if(!substr_count(get_headers($link)[0], '200')) {
-				$link = "Not-Found";
 			}
 		}
 

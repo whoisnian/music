@@ -8,7 +8,8 @@ function get_by_curl($url, $site) {
             'X-Real-IP: 118.88.88.88',
             'Cookie: appver=2.0.2',
             'Accept-Language: zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4',
-            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
+			'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
+			'Content-Type: application/x-www-form-urlencoded'
         );
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 	    curl_setopt($ch, CURLOPT_REFERER, "http://music.163.com/");

@@ -70,10 +70,6 @@ include "../include/function.php";
 		$key = json_decode($key_detail, true)["key"];
 		$link = "http://dl.stream.qqmusic.qq.com/M500".$_GET['mid'].".mp3?vkey=".$key."&guid=".$guid."&fromtag=64";
 
-		if(!substr_count(get_headers($link)[0], '200')) {
-			$link = "Not-Found";
-		}
-
 		$min = floor($song_detail["data"][0]["interval"] / 60);
 		$sec = floor($song_detail["data"][0]["interval"] % 60);
 		$min = str_pad($min, 2, '0', STR_PAD_LEFT);
