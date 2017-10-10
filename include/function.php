@@ -18,6 +18,9 @@ function get_by_curl($url, $site) {
 		curl_setopt($ch, CURLOPT_REFERER, "http://y.qq.com/");
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     }
+    else if($site == "kugou") {
+		curl_setopt($ch, CURLOPT_REFERER, "http://www.kugou.com/yy/html/search.html");
+    }
     $data = curl_exec($ch);
     curl_close($ch);
     return $data;
@@ -42,6 +45,9 @@ function post_by_curl($url, $post_data, $site) {
     else if($site == "qq") {
 		curl_setopt($ch, CURLOPT_REFERER, "http://y.qq.com/");
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+    }
+    else if($site == "kugou") {
+		curl_setopt($ch, CURLOPT_REFERER, "http://www.kugou.com/yy/html/search.html");
     }
     $data = curl_exec($ch);
     curl_close($ch);

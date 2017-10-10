@@ -9,7 +9,7 @@ You can download a song by PHP script [netease-cloud-music-download.php](https:/
 - [X] Beautify music player.  
 - [ ] More website supported.  
   - [ ] xiami.  
-  - [ ] kugou.  
+  - [X] kugou.  
 - [ ] Show search results with multiple pages.  
 
 ## Bug
