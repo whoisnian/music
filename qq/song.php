@@ -70,12 +70,6 @@ include "../include/function.php";
 		$key = json_decode($key_detail, true)["key"];
 		$link = "http://dl.stream.qqmusic.qq.com/M500".$_GET['mid'].".mp3?vkey=".$key."&guid=".$guid."&fromtag=64";
 
-		$min = floor($song_detail["data"][0]["interval"] / 60);
-		$sec = floor($song_detail["data"][0]["interval"] % 60);
-		$min = str_pad($min, 2, '0', STR_PAD_LEFT);
-		$sec = str_pad($sec, 2, '0', STR_PAD_LEFT);
-		$time = $min.':'.$sec;
-
 		echo '
 			<div class="center mdl-card mdl-grid mdl-grid--no-spacing mdl-shadow--6dp">
 				<span><img class="img" src="http://y.gtimg.cn/music/photo_new/T002R300x300M000'.$song_detail["data"][0]["album"]["mid"].'.jpg"></span>
@@ -101,7 +95,7 @@ include "../include/function.php";
 					<td style="width:80%">
 						<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0" id="player_slider">
 					</td>
-					<td style="width:10%"><span id="player_time">00:00</span>/'.$time.'</td>
+					<td style="width:10%"><span id="player_time">00:00</span>/<span id="total_time">00:00</span></td>
 					<td style="width:5%"><a href="'.$link.'" download="'.$song_detail["data"][0]["name"].'.mp3">
 					<button class="player-td mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
 						<i class="material-icons">file_download</i>

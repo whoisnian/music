@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var player_button = document.getElementById('player_button');
 	var player_slider = document.getElementById('player_slider');
 	var player_time = document.getElementById('player_time');
+	var total_time = document.getElementById('total_time');
 
 	player_button.addEventListener("click", play);
 	player_music.addEventListener("timeupdate", timeUpdate, false);
@@ -60,5 +61,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	player_music.addEventListener("canplaythrough", function() {
 		duration = player_music.duration;
+		total_time.innerHTML = (Math.floor(duration / 60) < 10 ? '0' + Math.floor(duration / 60) : Math.floor(duration / 60)) + ':' + (Math.floor(duration % 60) < 10 ? '0' + Math.floor(duration % 60) : Math.floor(duration % 60));
 	}, false);
 });

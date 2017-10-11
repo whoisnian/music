@@ -98,20 +98,6 @@ include "../include/function.php";
 			}
 		}
 
-		if($song["mMusic"] != NULL) {
-			$min = floor($song["mMusic"]["playTime"] / 1000 / 60);
-			$sec = floor($song["mMusic"]["playTime"] / 1000 % 60);
-			$min = str_pad($min, 2, '0', STR_PAD_LEFT);
-			$sec = str_pad($sec, 2, '0', STR_PAD_LEFT);
-		}
-		else {
-			$min = floor($song["bMusic"]["playTime"] / 1000 / 60);
-			$sec = floor($song["bMusic"]["playTime"] / 1000 % 60);
-			$min = str_pad($min, 2, '0', STR_PAD_LEFT);
-			$sec = str_pad($sec, 2, '0', STR_PAD_LEFT);
-		}
-		$time = $min.':'.$sec;
-
 		echo '
 			<div class="center mdl-card mdl-grid mdl-grid--no-spacing mdl-shadow--6dp">
 				<span><img class="img" src="'.$song["album"]["picUrl"].'?param=200y200"></span>
@@ -137,7 +123,7 @@ include "../include/function.php";
 					<td style="width:80%">
 						<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="0" id="player_slider">
 					</td>
-					<td style="width:10%"><span id="player_time">00:00</span>/'.$time.'</td>
+					<td style="width:10%"><span id="player_time">00:00</span>/<span id="total_time">00:00</span></td>
 					<td style="width:5%"><a href="'.$link.'" download="'.$song["name"].'.mp3">
 					<button class="player-td mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
 						<i class="material-icons">file_download</i>
