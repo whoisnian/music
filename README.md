@@ -15,6 +15,7 @@ You can download a song by PHP script [netease-cloud-music-download.php](https:/
 ## Bug
 * The music player's slider will be in wrong position before the song start when click the start button in iPhone.  
 * Sometimes (in mobile devices) can't change the song's progress by moving the silder.  
+* Now xiami music can not search album and playlist here. And it is difficult to find the album_id in [www.xiami.com](http://www.xiami.com).(But easily in [h.xiami.com](https://h.xiami.com))
 
 ## Address
 [http://music.whoisnian.com](http://music.whoisnian.com)
