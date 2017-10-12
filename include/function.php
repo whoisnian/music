@@ -19,7 +19,10 @@ function get_by_curl($url, $site) {
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     }
     else if($site == "kugou") {
-		curl_setopt($ch, CURLOPT_REFERER, "http://www.kugou.com/yy/html/search.html");
+		curl_setopt($ch, CURLOPT_REFERER, "http://www.kugou.com/");
+    }
+    else if($site == "xiami") {
+		curl_setopt($ch, CURLOPT_REFERER, "https://h.xiami.com/");
     }
     $data = curl_exec($ch);
     curl_close($ch);
@@ -47,7 +50,9 @@ function post_by_curl($url, $post_data, $site) {
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     }
     else if($site == "kugou") {
-		curl_setopt($ch, CURLOPT_REFERER, "http://www.kugou.com/yy/html/search.html");
+		curl_setopt($ch, CURLOPT_REFERER, "http://www.kugou.com/");
+    }else if($site == "xiami") {
+		curl_setopt($ch, CURLOPT_REFERER, "https://h.xiami.com/");
     }
     $data = curl_exec($ch);
     curl_close($ch);
