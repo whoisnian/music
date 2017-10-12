@@ -32,7 +32,7 @@ $OTHERSTYLE = '
 include '../include/header.php';
 include "../include/function.php";
 	if(isset($_POST['song'])) {
-    $url = "http://c.y.qq.com/soso/fcgi-bin/client_search_cp?p=1&n=30&inCharset=utf8&outCharset=utf-8&format=json&w=".rawurlencode($_POST['song']);
+    $url = "http://c.y.qq.com/soso/fcgi-bin/client_search_cp?new_json=1&cr=1&p=1&n=30&inCharset=utf8&outCharset=utf-8&format=json&w=".rawurlencode($_POST['song']);
 		$json = get_by_curl($url, "qq");
 		$songs = json_decode($json, true);
 	}
@@ -51,7 +51,7 @@ include "../include/function.php";
 				<h4>'.sprintf("%02d", $index+1).'</h4> 
 				<span class="mdl-list__item-primary-content">
 				  <i class="material-icons mdl-list__item-avatar">music_note</i>
-				  <span class="maxlen">'.$song["songname"].'</span>
+				  <span class="maxlen">'.$song["name"].'</span>
 				  <span class="mdl-list__item-sub-title maxlen">';
 
 			foreach($song["singer"] as $i=>$singer) {
@@ -62,7 +62,7 @@ include "../include/function.php";
 			echo '</span>
 				</span>
 				<span class="mdl-list__item-secondary-content">
-				  <a class="mdl-list__item-secondary-action" href="song.php?mid='.$song["songmid"].'"><i class="material-icons">zoom_in</i></a>
+				  <a class="mdl-list__item-secondary-action" href="song.php?mid='.$song["mid"].'"><i class="material-icons">zoom_in</i></a>
 				</span>
 			  </li>';
 		}
