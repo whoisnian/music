@@ -27,7 +27,7 @@
 		  		<a class="mdl-navigation__link" href="/netease">网易云音乐</a>
 					<a class="mdl-navigation__link" href="/qq">QQ音乐</a>
 					<a class="mdl-navigation__link" href="/kugou">酷狗音乐</a>
-          <a class="mdl-navigation__link" href="/xiami">虾米音乐</a>
+          <a class="mdl-navigation__link" href="/xiami">虾米音乐（待完善）</a>
 				</nav>
 	  	</div>
 	  	<main style="width:100%" class="mdl-layout__content mdl-grid mdl-grid--no-spacing">';
