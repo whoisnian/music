@@ -9,7 +9,7 @@
     <title>'.$TITLE.'</title>
 
     <link rel="shortcut icon" href="/image/favicon.png">
-    <link rel="icon" sizes="192x192" href="icon.png">
+    <link rel="icon" sizes="192x192" href="/image/icon.png">
     <link rel="stylesheet" href="/css/material.min.css">
     <link rel="stylesheet" href="/css/icon.css">    
     '.$OTHERSTYLE.'
