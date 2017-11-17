@@ -3,7 +3,7 @@ Search your favorite music.
 
 ## Notice
 The song downloaded needs to be renamed.  
-You can download a song by PHP script [netease-cloud-music-download.php](https://raw.githubusercontent.com/whoisnian/script/master/netease-cloud-music-download.php)(for linux) and needn't rename the song.
+You can download a song by PHP script [netease-cloud-music-download](https://raw.githubusercontent.com/whoisnian/script/master/netease-cloud-music-download)(for linux) and needn't rename the song.
 
 ## Todo
 - [X] Beautify music player.  
