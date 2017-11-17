@@ -8,6 +8,8 @@ You can download a song by PHP script [netease-cloud-music-download.php](https:/
 ## Todo
 - [X] Beautify music player.  
 - [X] More website supported.  
+  - [X] netease.  
+  - [X] qq.  
   - [X] xiami.  
   - [X] kugou.  
 - [ ] Show search results with multiple pages.  

@@ -87,14 +87,17 @@ include "../include/function.php";
 					break;
 			}
 
-			if(array_key_exists("mp3Url", $song) && $song["mp3Url"] != null) {
-				$link = str_replace("http://m2", "http://p2", $song["mp3Url"]);
+			if($song["hMusic"]["dfsId"] != NULL&&$song["hMusic"]["dfsId"] != 0) {
+				$link = "http://p2.music.126.net/".encrypt_id($song["hMusic"]["dfsId"])."/".$song["hMusic"]["dfsId"].".mp3";
 			}
-			else if($song["mMusic"]["dfsId"] != 0) {
+			else if($song["mMusic"]["dfsId"] != NULL&&$song["mMusic"]["dfsId"] != 0) {
 				$link = "http://p2.music.126.net/".encrypt_id($song["mMusic"]["dfsId"])."/".$song["mMusic"]["dfsId"].".mp3";
 			}
-			else {
+			else if($song["bMusic"]["dfsId"] != NULL&&$song["bMusic"]["dfsId"] != 0) {
 				$link = "http://p2.music.126.net/".encrypt_id($song["bMusic"]["dfsId"])."/".$song["bMusic"]["dfsId"].".mp3";
+			}
+			else if(array_key_exists("mp3Url", $song) && $song["mp3Url"] != null) {
+				$link = str_replace("http://m2", "http://p2", $song["mp3Url"]);
 			}
 		}
 
