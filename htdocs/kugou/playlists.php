@@ -29,8 +29,8 @@ $OTHERSTYLE = '
 		}
 	}
 	</style>';
-include '../include/header.php';
-include "../include/function.php";
+include '../../views/header.php';
+include "../../functions/function.php";
 	if(isset($_POST['playlist'])) {
     $url = "http://specialsearch.kugou.com/special_search?platform=WebFilter&page=1&pagesize=99&iscorrection=1&keyword=".rawurlencode($_POST['playlist']);
 		$json = get_by_curl($url, "kugou");
@@ -76,5 +76,5 @@ include "../include/function.php";
 			</li>
 		  </ul>';
 	}
-include "../include/footer.php";
+include "../../views/footer.php";
 ?>

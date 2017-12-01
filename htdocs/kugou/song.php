@@ -51,8 +51,8 @@ $OTHERSTYLE = '
 		border-collapse: collapse;
 	}
 	</style>';
-include '../include/header.php';
-include "../include/function.php";
+include '../../views/header.php';
+include "../../functions/function.php";
 	if(isset($_GET['hash'])&&isset($_GET['album_id'])) {
 		$url = "http://www.kugou.com/yy/index.php?r=play/getdata&hash=".$_GET['hash']."&album_id=".$_GET['album_id'];
 		$json = get_by_curl($url, "kugou");
@@ -105,5 +105,5 @@ include "../include/function.php";
 			</li>
 		  </ul>';
 	}
-include "../include/footer.php";
+include "../../views/footer.php";
 ?>

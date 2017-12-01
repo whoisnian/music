@@ -29,8 +29,8 @@ $OTHERSTYLE = '
 		}
 	}
 	</style>';
-include '../include/header.php';
-include "../include/function.php";
+include '../../views/header.php';
+include "../../functions/function.php";
 	if(isset($_GET['id'])) {
     $url = "http://api.xiami.com/web?v=2.0&app_key=1&r=collect/detail&id=".$_GET["id"];
 		$json = get_by_curl($url, "xiami");
@@ -73,5 +73,5 @@ include "../include/function.php";
 			</li>
 		  </ul>';
 	}
-include "../include/footer.php";
+include "../../views/footer.php";
 ?>

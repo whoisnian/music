@@ -29,8 +29,8 @@ $OTHERSTYLE = '
 		}
 	}
 	</style>';
-include '../include/header.php';
-include "../include/function.php";
+include '../../views/header.php';
+include "../../functions/function.php";
 	if(isset($_GET['id'])) {
     $url = "http://mobilecdn.kugou.com/api/v3/special/song?plat=0&page=1&pagesize=-1&version=8352&specialid=".$_GET['id'];
 		$json = get_by_curl($url, "kugou");
@@ -73,5 +73,5 @@ include "../include/function.php";
 			</li>
 		  </ul>';
 	}
-include "../include/footer.php";
+include "../../views/footer.php";
 ?>

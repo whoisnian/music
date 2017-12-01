@@ -15,7 +15,7 @@ $OTHERSTYLE = '
 		width:100%;
 	}
 	</style>';
-include '../include/header.php';
+include '../../views/header.php';
 	echo '
 		<section class="mdl-layout__tab-panel wide is-active" id="search_song">
 		  <form class="mdl-cell center" action="./songs.php" method="post">
@@ -47,5 +47,5 @@ include '../include/header.php';
 			  <input class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" name="submit" value="歌单搜索"><br/>
 		  </form>
 		</section>';
-include '../include/footer.php';
+include '../../views/footer.php';
 ?>

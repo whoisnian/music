@@ -33,8 +33,8 @@ $OTHERSTYLE = '
 		color: #757575;
 	}
 	</style>';
-include '../include/header.php';
-include "../include/function.php";
+include '../../views/header.php';
+include "../../functions/function.php";
 	if(isset($_POST['album'])) {
     $url = "http://mobilecdn.kugou.com/api/v3/search/album?page=1&pagesize=99&keyword=".rawurlencode($_POST['album']);
 		$json = get_by_curl($url, "kugou");
@@ -81,5 +81,5 @@ include "../include/function.php";
 			</li>
 		  </ul>';
 	}
-include "../include/footer.php";
+include "../../views/footer.php";
 ?>

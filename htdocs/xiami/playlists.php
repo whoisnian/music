@@ -29,8 +29,8 @@ $OTHERSTYLE = '
 		}
 	}
 	</style>';
-include '../include/header.php';
-include "../include/function.php";
+include '../../views/header.php';
+include "../../functions/function.php";
 	if(isset($_POST['playlist'])) {
     if(ctype_digit($_POST['playlist'])) {
 			echo '<meta http-equiv="refresh" content="0;url=playlist.php?id='.$_POST['playlist'].'">';
@@ -52,5 +52,5 @@ include "../include/function.php";
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 		exit();
 	}
-include "../include/footer.php";
+include "../../views/footer.php";
 ?>

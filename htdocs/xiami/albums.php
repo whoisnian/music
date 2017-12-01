@@ -33,8 +33,8 @@ $OTHERSTYLE = '
 		color: #757575;
 	}
 	</style>';
-include '../include/header.php';
-include "../include/function.php";
+include '../../views/header.php';
+include "../../functions/function.php";
 	if(isset($_POST['album'])) {
     if(ctype_digit($_POST['album'])) {
 			echo '<meta http-equiv="refresh" content="0;url=album.php?id='.$_POST['album'].'">';
@@ -56,5 +56,5 @@ include "../include/function.php";
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 		exit();
 	}
-include "../include/footer.php";
+include "../../views/footer.php";
 ?>
