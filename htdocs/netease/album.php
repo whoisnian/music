@@ -1,10 +1,9 @@
 <?php
 include '../../configs/global.php';
 include FUNC_PATH . "/function.php";
+include FUNC_PATH . "/netease.php";
 if (isset($_GET['id'])) {
-    $url = "http://music.163.com/api/album/" . $_GET['id'] . "?id=" . $_GET['id'];
-    $json = get_by_curl($url, "163");
-    $album = json_decode($json, true);
+    $album = Netease::get_album($_GET['id']);
 } else {
     echo '<meta http-equiv="refresh" content="0;url=index.php">';
     exit();
