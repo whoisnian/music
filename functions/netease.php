@@ -1,62 +1,68 @@
 <?php
+
 class Netease
 {
-    static function get_album($id, $json_encode = false) {
-        $url = "http://music.163.com/api/album/" . $id. "?id=" . $id;
+    static function get_album($id, $json_encode = false)
+    {
+        $url = "http://music.163.com/api/album/" . $id . "?id=" . $id;
         $json = get_by_curl($url, "163");
-        if($json_encode)
+        if ($json_encode)
             return $json;
         else
             return json_decode($json, true);
     }
-    static function get_albums($album, $json_encode = false) {
+
+    static function get_albums($album, $json_encode = false)
+    {
         $url = "http://music.163.com/api/search/pc";
         $post_data = "offset=0&limit=99&type=10&s=" . $album;
         $json = post_by_curl($url, $post_data, "163");
-        if($json_encode)
+        if ($json_encode)
             return $json;
         else
             return json_decode($json, true);
     }
-    static function get_playlist($id, $json_encode = false) {
+
+    static function get_playlist($id, $json_encode = false)
+    {
         $url = "http://music.163.com/api/playlist/detail?id=" . $id;
         $json = get_by_curl($url, "163");
-        if($json_encode)
+        if ($json_encode)
             return $json;
         else
             return json_decode($json, true);
     }
-    static function get_playlists($playlist, $json_encode = false) {
+
+    static function get_playlists($playlist, $json_encode = false)
+    {
         $url = "http://music.163.com/api/search/pc";
         $post_data = "offset=0&limit=99&type=1000&s=" . $playlist;
         $json = post_by_curl($url, $post_data, "163");
-        if($json_encode)
+        if ($json_encode)
             return $json;
         else
             return json_decode($json, true);
     }
-    static function get_song($id, $json_encode = false, $raw = false) {
-        $url = "https://music.163.com/api/song/detail/?id=".$_GET['id']."&ids=[".$_GET['id']."]";
+
+    static function get_song($id, $json_encode = false, $raw = false)
+    {
+        $url = "https://music.163.com/api/song/detail/?id=" . $id . "&ids=[" . $id . "]";
         $json = get_by_curl($url, "163");
         $song_detail = json_decode($json, true);
-        if($raw) {
-            if($json_encode)
+        if ($raw) {
+            if ($json_encode)
                 return $json;
             else
                 return $song_detail;
         }
 
-        // Get lyric of the song
-        // $url = "http://music.163.com/api/song/media?id=".$_GET['id'];
-        // $lyric = json_decode(get_by_curl($url), true)["lyric"];
-
         // Thanks to https://github.com/maicong/music/blob/master/music.php
-        $other_url = "https://music.163.com/api/song/enhance/player/url?ids=[".$_GET['id']."]&br=320000";
+        $other_url = "https://music.163.com/api/song/enhance/player/url?ids=[" . $id . "]&br=320000";
         $other_json = get_by_curl($other_url, "163");
         $other_link = json_decode($other_json, true);
 
         $song = null;
-        if($song_detail["songs"] != NULL && $song_detail["code"] == 200) {
+        if ($song_detail["songs"] != NULL && $song_detail["code"] == 200) {
             if ($other_link["data"][0]["url"] != NULL) {
                 $song = $song_detail["songs"][0];
                 $song['link'] = $other_link["data"][0]["url"];
@@ -81,19 +87,32 @@ class Netease
                 }
             }
         }
-        if(isset($song["link"])) $song["link"] = str_replace("http://", "https://", $song["link"]);
-        if(isset($song["album"]["picUrl"])) $song["album"]["picUrl"] = str_replace("http://", "https://", $song["album"]["picUrl"]);
+        if (isset($song["link"])) $song["link"] = str_replace("http://", "https://", $song["link"]);
+        if (isset($song["album"]["picUrl"])) $song["album"]["picUrl"] = str_replace("http://", "https://", $song["album"]["picUrl"]);
 
-        if($json_encode)
+        // Get lyrics of the song
+        $url = "https://music.163.com/api/song/media?id=" . $id;
+        $lyrics_obj = json_decode(get_by_curl($url, "163"), true);
+        if (isset($lyrics_obj["lyric"]))
+            $song['lyrics'] = $lyrics_obj["lyric"];
+
+        $url = "https://music.163.com/api/song/lyric?tv=-1&id=" . $id;
+        $trans_obj = json_decode(get_by_curl($url, "163"), true);
+        if (isset($trans_obj["tlyric"]) && isset($trans_obj["tlyric"]["lyric"]))
+            $song['translation'] = $trans_obj["tlyric"]["lyric"];
+
+        if ($json_encode)
             return json_encode(['code' => 200, 'song' => $song]);
         else
             return $song;
     }
-    static function get_songs($song, $json_encode = false) {
+
+    static function get_songs($song, $json_encode = false)
+    {
         $url = "http://music.163.com/api/search/pc";
         $post_data = "offset=0&limit=99&type=1&s=" . $song;
         $json = post_by_curl($url, $post_data, "163");
-        if($json_encode)
+        if ($json_encode)
             return $json;
         else
             return json_decode($json, true);
