@@ -1,18 +1,27 @@
 <?php
 include '../../../configs/global.php';
 include FUNC_PATH . "/function.php";
-include FUNC_PATH . "/netease.php";
 if (isset($_GET['src']))
     $src = $_GET['src'];
 else
     $src = "netease";
 switch ($src) {
     case "netease":
+        include FUNC_PATH . "/netease.php";
         if (isset($_GET['id'])) {
             $song = Netease::get_song($_GET['id']);
         } else {
             $song = Netease::get_song(514055326);
         }
+        break;
+    case "qq":
+        include FUNC_PATH . "/qq.php";
+        if (isset($_GET['id'])) {
+            $song = QQ::get_song($_GET['id']);
+        } else {
+            $song = QQ::get_song("000mgygi0JqEUN");
+        }
+        break;
 }
 ?>
 <html>
@@ -37,7 +46,7 @@ switch ($src) {
                 ?>',
             url: '<?php echo $song["link"] ?>',
             pic: '<?php echo $song["album"]["picUrl"] ?>',
-            lrc: <?php if(isset($song["lyrics"])) echo json_encode($song["lyrics"]) ?>
+            lrc: <?php if(isset($song["lyrics"])) echo json_encode($song["lyrics"]); else echo "''"?>
         }
     });
 </script>
