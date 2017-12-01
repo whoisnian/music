@@ -7,7 +7,7 @@ $OTHERSTYLE = '
 		margin:0 auto;
 	}
 	</style>';
-include './include/header.php';
+include '../views/header.php';
 	echo '
 		<h1 class="center">
 		  <br/>
@@ -30,5 +30,5 @@ include './include/header.php';
 			  下 载
 		  </div>
 		</h1>';
-include "./include/footer.php";
+include "../views/footer.php";
 ?>

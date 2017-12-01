@@ -1,5 +1,4 @@
 <?php
-$TITLE = '网易云音乐';
 $TABS = '
 		<div class="mdl-layout__tab-bar mdl-js-ripple-effect">
       <a href="#search_song" class="mdl-layout__tab mdl-navigation__link is-active"><i class="material-icons">music_note</i> 歌曲搜索</a>
@@ -15,7 +14,7 @@ $OTHERSTYLE = '
 		width:100%;
 	}
 	</style>';
-include '../include/header.php';
+include VIEW_PATH . '/header.php';
 	echo '
 		<section class="mdl-layout__tab-panel wide is-active" id="search_song">
 		  <form class="mdl-cell center" action="./songs.php" method="post">
@@ -47,5 +46,5 @@ include '../include/header.php';
 			  <input class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" name="submit" value="歌单搜索"><br/>
 		  </form>
 		</section>';
-include '../include/footer.php';
+include VIEW_PATH . '/footer.php';
 ?>

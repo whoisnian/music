@@ -33,40 +33,32 @@ $OTHERSTYLE = '
 		color: #757575;
 	}
 	</style>';
-include '../include/header.php';
-include "../include/function.php";
-	if(isset($_POST['album'])) {
-    $url = "http://c.y.qq.com/soso/fcgi-bin/client_search_cp?t=8&p=1&n=30&inCharset=utf8&outCharset=utf-8&format=json&w=".rawurlencode($_POST['album']);
-		$json = get_by_curl($url, "qq");
-		$albums = json_decode($json, true);
-	}
-	else {
-		echo '<meta http-equiv="refresh" content="0;url=index.php">';
-		exit();
-	}
-	
-	if(array_key_exists("data", $albums) && $albums["data"]["album"]["totalnum"] > 0) {
-		echo '
+include VIEW_PATH . '/header.php';
+if (array_key_exists("result", $albums) && $albums["result"]["albumCount"] > 0) {
+    echo '
 		  <ul class="demo-list-two mdl-list center">';
-		foreach($albums["data"]["album"]["list"] as $index=>$album) {
-			echo '
+    foreach ($albums["result"]["albums"] as $index => $album) {
+        $time = date("Y-m-d", $album["publishTime"] / 1000);
+        echo '
 			  <li style="padding:0 5px" class="mdl-list__item mdl-list__item--two-line">
-				<h4>'.sprintf("%02d", $index+1).'</h4> 
+				<h4>' . sprintf("%02d", $index + 1) . '</h4> 
 				<span class="mdl-list__item-primary-content">
 				  <i class="material-icons  no_color mdl-list__item-avatar">album</i>
-				  <span class="maxlen">'.$album["albumName"].'</span>
-				  <span class="mdl-list__item-sub-title maxlen">'.$album["singerName"].'<span class="mdl-button--accent">@</span>'.$album["publicTime"].'</span>
+				  <span class="maxlen">' . $album["name"] . '</span>
+				  <span class="mdl-list__item-sub-title maxlen">' . $album["artist"]["name"] . '<span class="mdl-button--accent">@</span>' . $time . '</span>
 				</span>
 				<span class="mdl-list__item-secondary-content">
-				  <a class="mdl-list__item-secondary-action" href="album.php?mid='.$album["albumMID"].'"><i class="material-icons">zoom_in</i></a>
+				  <a class="mdl-list__item-secondary-action" href="album.php?id=' . $album["id"] . '"><i class="material-icons">zoom_in</i></a>
 				</span>
 				</li>';
-		}
-		echo '
+    }
+    echo '
 		  </ul>';
-	}
-	else {
-		echo '
+} else if (ctype_digit($_POST['album'])) {
+    echo '<meta http-equiv="refresh" content="0;url=album.php?id=' . $_POST['album'] . '">';
+    exit();
+} else {
+    echo '
 		  <ul class="demo-list-control mdl-list center">
 			<li class="mdl-list__item">
 			  <span class="mdl-list__item-primary-content">
@@ -75,6 +67,6 @@ include "../include/function.php";
 			  </span>
 			</li>
 		  </ul>';
-	}
-include "../include/footer.php";
+}
+include VIEW_PATH . "/footer.php";
 ?>
