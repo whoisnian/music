@@ -1,10 +1,6 @@
 # music
 Search your favorite music.  
 
-## Notice
-The song downloaded needs to be renamed.  
-You can download a song by PHP script [netease-cloud-music-download](https://raw.githubusercontent.com/whoisnian/script/master/netease-cloud-music-download)(for linux) and needn't rename the song.
-
 ## Todo
 - [X] Beautify music player.  
 - [X] More website supported.  
@@ -40,3 +36,7 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 ## Address
 [http://music.whoisnian.com](http://music.whoisnian.com)
+
+## Contributors
+* [hudson6666](https://github.com/hudson6666)  
+* [whoisnian](https://github.com/whoisnian)
