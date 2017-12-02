@@ -22,6 +22,22 @@ switch ($src) {
             $song = QQ::get_song("000mgygi0JqEUN");
         }
         break;
+    case "kugou":
+        include FUNC_PATH . "/kugou.php";
+        if (isset($_GET['id'])) {
+            $song = Kugou::get_song($_GET['id']);
+        } else {
+            $song = Kugou::get_song("eyJoYXNoIjoiODQ3NjM3OUUyOUJDNTc5NjVBMDMzMzI0NkI5OTg0OTkiLCJhbGJ1bV9pZCI6Ijc4Mzg1NzYifQ");
+        }
+        break;
+    case "xiami":
+        include FUNC_PATH . "/xiami.php";
+        if (isset($_GET['id'])) {
+            $song = Xiami::get_song($_GET['id']);
+        } else {
+            $song = Xiami::get_song("1771939336");
+        }
+        break;
 }
 ?>
 <html>
@@ -46,7 +62,7 @@ switch ($src) {
                 ?>',
             url: '<?php echo $song["link"] ?>',
             pic: '<?php echo $song["album"]["picUrl"] ?>',
-            lrc: <?php if(isset($song["lyrics"])) echo json_encode($song["lyrics"]); else echo "''"?>
+            lrc: <?php if (isset($song["lyrics"])) echo json_encode($song["lyrics"]); else echo "''"?>
         }
     });
 </script>
