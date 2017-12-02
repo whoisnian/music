@@ -20,7 +20,11 @@ class QQ
             $album["album"]["size"] = $album_raw["data"]["total_song_num"];
             $album["album"]["songs"] = [];
             foreach ($album_raw["data"]["list"] as $index => $song) {
-                $album["album"]["songs"][$index] = ['name' => $song["songname"], 'artists' => $song["singer"], 'id' => $song["songmid"]];
+                $album["album"]["songs"][$index] = [
+                    'name' => $song["songname"],
+                    'artists' => $song["singer"],
+                    'id' => $song["songmid"]
+                ];
             }
         }
         if ($json_encode)
@@ -48,7 +52,7 @@ class QQ
             foreach ($albums_raw["data"]["album"]["list"] as $index => $album) {
                 $albums["result"]["albums"][$index] = [
                     "id" => $album["albumMID"],
-                    "publishTime" => strtotime($album["publicTime"]),
+                    "publishTime" => strtotime($album["publicTime"]) * 1000,
                     "name" => $album["albumName"],
                     "artist" => ["name" => $album["singerName"]],
                 ];
@@ -140,11 +144,11 @@ class QQ
             $key_url = "http://base.music.qq.com/fcgi-bin/fcg_musicexpress.fcg?json=3&inCharset=utf8&outCharset=utf-8&format=json&guid=".$guid;
             $key_detail = get_by_curl($key_url, "qq");
             $key = json_decode($key_detail, true)["key"];
-            $link = "http://dl.stream.qqmusic.qq.com/M500".$id.".mp3?vkey=".$key."&guid=".$guid."&fromtag=64";
+            $link = "https://dl.stream.qqmusic.qq.com/M500".$id.".mp3?vkey=".$key."&guid=".$guid."&fromtag=64";
 
             $song = [];
             $song["album"] = [
-                "picUrl" => 'http://y.gtimg.cn/music/photo_new/T002R300x300M000'.$song_detail["data"][0]["album"]["mid"].'.jpg',
+                "picUrl" => 'https://y.gtimg.cn/music/photo_new/T002R300x300M000'.$song_detail["data"][0]["album"]["mid"].'.jpg',
                 "id" => $song_detail["data"][0]["album"]["mid"],
                 "name" => $song_detail["data"][0]["album"]["name"],
             ];
