@@ -57,11 +57,11 @@ switch ($src) {
             {
                 src: '<?php echo $song["link"] ?>',
                 poster: '<?php echo $song["album"]["picUrl"] ?>',
-                name: '<?php echo $song["name"] ?>',
+                name: '<?php echo addslashes($song["name"]) ?>',
                 artist: '<?php
                     foreach ($song["artists"] as $i => $artist) {
                         echo($i == 0 ? "" : "/");
-                        echo $artist["name"];
+                        echo addslashes($artist["name"]);
                     }
                     ?>',
                 lyric: <?php if (isset($song["lyrics"])) echo json_encode($song["lyrics"]); else echo "''"?>,

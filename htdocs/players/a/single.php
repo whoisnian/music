@@ -53,11 +53,11 @@ switch ($src) {
         element: document.getElementById('aplayer1'),
         showlrc: <?php echo isset($song["lyrics"]) ? 1 : 0 ?>,
         music: {
-            title: '<?php echo $song["name"] ?>',
+            title: '<?php echo addslashes($song["name"]) ?>',
             author: '<?php
                 foreach ($song["artists"] as $i => $artist) {
                     echo($i == 0 ? "" : "/");
-                    echo $artist["name"];
+                    echo addslashes($artist["name"]);
                 }
                 ?>',
             url: '<?php echo $song["link"] ?>',

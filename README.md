@@ -38,5 +38,12 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 [http://music.whoisnian.com](http://music.whoisnian.com)
 
 ## Contributors
-* [hudson6666](https://github.com/hudson6666)  
-* [whoisnian](https://github.com/whoisnian)
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+| [<img src="https://avatars2.githubusercontent.com/u/23057947?v=4" width="80px;"/><br /><sub>whoisnian</sub>](https://github.com/whoisnian)<br />[💻](https://github.com/whoisnian/music/commits?author=whoisnian "Code") [🤔](#ideas-whoisnian "Ideas & Planning") | [<img src="https://avatars1.githubusercontent.com/u/18373361?v=4" width="80px;"/><br /><sub>hudson6666</sub>](https://github.com/hudson6666)<br />[💻](https://github.com/whoisnian/music/commits?author=hudson6666 "Code") [🤔](#ideas-hudson6666 "Ideas & Planning") |
+| :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!

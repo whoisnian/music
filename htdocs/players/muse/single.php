@@ -50,16 +50,16 @@ switch ($src) {
 <script src="https://unpkg.com/muse-player/dist/assets/muse-player.js" type="text/javascript"></script>
 <script>
     MUSE.render([{
-        title: '<?php echo $song["name"] ?>',
+        title: '<?php echo addslashes($song["name"]) ?>',
         artist: '<?php
             foreach ($song["artists"] as $i => $artist) {
                 echo($i == 0 ? "" : "/");
-                echo $artist["name"];
+                echo addslashes($artist["name"]);
             }
             ?>',
         cover: '<?php echo $song["album"]["picUrl"] ?>',
         src: '<?php echo $song["link"] ?>',
-        lyric: <?php if (isset($song["lyrics"])) echo json_encode($song["lyrics"]); else echo "''"?>,
+        lyric: <?php if (isset($song["lyrics"])) echo json_encode($song["lyrics"]); else echo "'[00:00.00]\\n'"?>,
     }], document.getElementById('player'));
 </script>
 </html>
