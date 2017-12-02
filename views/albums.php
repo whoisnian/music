@@ -48,14 +48,14 @@ if (array_key_exists("result", $albums) && $albums["result"]["albumCount"] > 0) 
 				  <span class="mdl-list__item-sub-title maxlen">' . $album["artist"]["name"] . '<span class="mdl-button--accent">@</span>' . $time . '</span>
 				</span>
 				<span class="mdl-list__item-secondary-content">
-				  <a class="mdl-list__item-secondary-action" href="album.php?id=' . $album["id"] . '"><i class="material-icons">zoom_in</i></a>
+				  <a class="mdl-list__item-secondary-action" href="album?id=' . $album["id"] . '"><i class="material-icons">zoom_in</i></a>
 				</span>
 				</li>';
     }
     echo '
 		  </ul>';
 } else if (ctype_digit($_POST['album'])) {
-    echo '<meta http-equiv="refresh" content="0;url=album.php?id=' . $_POST['album'] . '">';
+    echo '<meta http-equiv="refresh" content="0;url=album?id=' . $_POST['album'] . '">';
     exit();
 } else {
     echo '

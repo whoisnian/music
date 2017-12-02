@@ -17,7 +17,7 @@ $OTHERSTYLE = '
 include VIEW_PATH . '/header.php';
 	echo '
 		<section class="mdl-layout__tab-panel wide is-active" id="search_song">
-		  <form class="mdl-cell center" action="./songs.php" method="post">
+		  <form class="mdl-cell center" action="./songs" method="post">
 			  <br/><br/>
 		    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label wide">
 			    <input class="mdl-textfield__input" type="text" name="song" id="song">
@@ -27,7 +27,7 @@ include VIEW_PATH . '/header.php';
 		  </form>
 		</section>
 		<section class="mdl-layout__tab-panel wide" id="search_album">
-		  <form class="mdl-cell center" action="./albums.php" method="post">
+		  <form class="mdl-cell center" action="./albums" method="post">
 			  <br/><br/>
 		    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label wide">
 			    <input class="mdl-textfield__input" type="text" name="album" id="album">
@@ -37,7 +37,7 @@ include VIEW_PATH . '/header.php';
 		  </form>
 		</section>
 		<section class="mdl-layout__tab-panel wide" id="search_playlist">
-		  <form class="mdl-cell center" action="./playlists.php" method="post">
+		  <form class="mdl-cell center" action="./playlists" method="post">
 			  <br/><br/>
 		    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label wide">
 			    <input class="mdl-textfield__input" type="text" name="playlist" id="playlist">

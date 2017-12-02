@@ -5,7 +5,7 @@ include FUNC_PATH . "/qq.php";
 if (isset($_POST['album'])) {
     $albums = QQ::get_albums(rawurlencode($_POST['album']));
 } else {
-    echo '<meta http-equiv="refresh" content="0;url=index.php">';
+    echo '<meta http-equiv="refresh" content="0;url=./">';
     exit();
 }
 

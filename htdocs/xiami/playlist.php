@@ -5,7 +5,7 @@ include FUNC_PATH . "/xiami.php";
 if (isset($_GET['id'])) {
     $playlist = Xiami::get_playlist($_GET['id']);
 } else {
-    echo '<meta http-equiv="refresh" content="0;url=index.php">';
+    echo '<meta http-equiv="refresh" content="0;url=./">';
     exit();
 }
 

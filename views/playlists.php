@@ -43,7 +43,7 @@ include VIEW_PATH . '/header.php';
 				  <span class="mdl-list__item-sub-title maxlen">'.$playlist["creator"]["nickname"].'</span>
 				</span>
 				<span class="mdl-list__item-secondary-content">
-				  <a class="mdl-list__item-secondary-action" href="playlist.php?id='.$playlist["id"].'"><i class="material-icons">zoom_in</i></a>
+				  <a class="mdl-list__item-secondary-action" href="playlist?id='.$playlist["id"].'"><i class="material-icons">zoom_in</i></a>
 				</span>
 			  </li>';
 		}
@@ -51,7 +51,7 @@ include VIEW_PATH . '/header.php';
 		  </ul>';
 	}
 	else if(ctype_digit($_POST['playlist'])) {
-		echo '<meta http-equiv="refresh" content="0;url=playlist.php?id='.$_POST['playlist'].'">';
+		echo '<meta http-equiv="refresh" content="0;url=playlist?id='.$_POST['playlist'].'">';
 		exit();
 	}
 	else {

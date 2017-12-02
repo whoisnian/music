@@ -68,7 +68,7 @@ if (array_key_exists("name", $song)) {
         echo $artist["name"];
     }
     echo '<br/>
-				  	专辑：<a href="album.php?id=' . $song["album"]["id"] . '">' . $song["album"]["name"] . '</a>
+				  	专辑：<a href="album?id=' . $song["album"]["id"] . '">' . $song["album"]["name"] . '</a>
 					</div>
 				</span>
 				<audio src="' . $song["link"] . '" type="audio/mp3" id="player_music"></audio>

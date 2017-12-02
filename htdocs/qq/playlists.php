@@ -5,7 +5,7 @@ include FUNC_PATH . "/qq.php";
 if (isset($_POST['playlist'])) {
     $playlists = QQ::get_playlists(rawurlencode($_POST['playlist']));
 } else {
-    echo '<meta http-equiv="refresh" content="0;url=index.php">';
+    echo '<meta http-equiv="refresh" content="0;url=./">';
     exit();
 }
 

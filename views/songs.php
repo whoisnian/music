@@ -64,7 +64,7 @@ if (array_key_exists("result", $songs) && $songs["result"]["songCount"] > 0) {
         echo '</span>
 				</span>
 				<span class="mdl-list__item-secondary-content">
-				  <a class="mdl-list__item-secondary-action" href="song.php?id=' . $song["id"] . '"><i class="material-icons">zoom_in</i></a>
+				  <a class="mdl-list__item-secondary-action" href="song?id=' . $song["id"] . '"><i class="material-icons">zoom_in</i></a>
 				</span>
 			  </li>';
     }
