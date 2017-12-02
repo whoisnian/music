@@ -15,7 +15,7 @@ class QQ
         }
         $album_raw = $album;
         $album = [];
-        if (array_key_exists("data", $album_raw) && $album_raw["code"] == 0) {
+        if ($album_raw && array_key_exists("data", $album_raw) && $album_raw["code"] == 0) {
             $album["album"] = [];
             $album["album"]["size"] = $album_raw["data"]["total_song_num"];
             $album["album"]["songs"] = [];
@@ -46,7 +46,7 @@ class QQ
         }
         $albums_raw = $albums;
         $albums["result"] = [];
-        if (array_key_exists("data", $albums_raw) && $albums_raw["data"]["album"]["totalnum"] > 0) {
+        if ($albums_raw && array_key_exists("data", $albums_raw) && $albums_raw["data"]["album"]["totalnum"] > 0) {
             $albums["result"]["albumCount"] = $albums_raw["data"]["album"]["totalnum"];
             $albums["result"]["albums"] = [];
             foreach ($albums_raw["data"]["album"]["list"] as $index => $album) {
@@ -77,7 +77,7 @@ class QQ
         }
         $playlist_raw = $playlist;
         $playlist = [];
-        if (array_key_exists("cdlist", $playlist_raw) && count($playlist_raw["cdlist"]) && $playlist_raw["cdlist"][0]["total_song_num"] > 0) {
+        if ($playlist_raw && array_key_exists("cdlist", $playlist_raw) && count($playlist_raw["cdlist"]) && $playlist_raw["cdlist"][0]["total_song_num"] > 0) {
             $playlist["result"] = [];
             $playlist["result"]["trackCount"] = $playlist_raw["cdlist"][0]["total_song_num"];
             $playlist["result"]["tracks"] = [];
@@ -139,7 +139,7 @@ class QQ
                 return $song_detail;
         }
         $song = null;
-        if($song_detail["data"] != NULL && $song_detail["code"] == 0) {
+        if($song_detail && $song_detail["data"] && $song_detail["code"] == 0) {
             $guid = rand(1000000000, 2000000000);
             $key_url = "http://base.music.qq.com/fcgi-bin/fcg_musicexpress.fcg?json=3&inCharset=utf8&outCharset=utf-8&format=json&guid=".$guid;
             $key_detail = get_by_curl($key_url, "qq");
@@ -175,7 +175,7 @@ class QQ
         }
         $songs_raw = $songs;
         $songs = [];
-        if (array_key_exists("data", $songs_raw) && $songs_raw["data"]["song"]["totalnum"] > 0) {
+        if ($songs_raw && array_key_exists("data", $songs_raw) && $songs_raw["data"]["song"]["totalnum"] > 0) {
             $songs["result"] = [];
             $songs["result"]["songCount"] = $songs_raw["data"]["song"]["totalnum"];
             $songs["result"]["songs"] = [];
